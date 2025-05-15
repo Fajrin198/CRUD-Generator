@@ -13,7 +13,7 @@
         <div style="margin-right: 20px; color: #007bff; cursor: pointer; {{ $tittle == "formDisplay" ? 'font-weight: bold; text-decoration: underline;' : '' }}">
             <a class="nav-link d-flex align-items-center gap-2" href="{{ route('formDisplay') }}">Step 3 - Form Display</a>
         </div>
-        <div style="margin-right: 20px; color: #007bff; cursor: pointer; {{ $tittle == "configuration" ? 'font-weight: bold; text-decoration: underline;' : '' }}">
+        <!-- <div style="margin-right: 20px; color: #007bff; cursor: pointer; {{ $tittle == "configuration" ? 'font-weight: bold; text-decoration: underline;' : '' }}">
             <a class="nav-link d-flex align-items-center gap-2" href="{{ route('configuration') }}">Step 4 - Configuration</a>
-        </div>
+        </div> -->
     </div>

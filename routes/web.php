@@ -5,11 +5,25 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ModuleGeneratorController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 Route::resource('posts', PostController::class);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/', [MenuController::class, 'index'])->name('index');
-Route::get('/index', [MenuController::class, 'index'])->name('index');
+// Route::get('/', [MenuController::class, 'index'])->name('index');
+Route::get('/', function () {
+    return view('login');
+});
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store'])->name('registration');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+Route::get('/admin', [AdminController::class, 'admin'])->middleware('auth');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/index', [MenuController::class, 'index']);
+});
 
 Route::get('/superAdmin', [SuperAdminController::class, 'index'])->name('superAdmin');
 Route::delete('/superAdmin1', [SuperAdminController::class, 'destroy'])->name('superAdmin.destroy');
@@ -30,12 +44,7 @@ Route::post('/displayTable3', [MenuController::class, 'processForm2'])->name('pr
 // });
 // Route::get('/', [ModuleGeneratorController::class, 'index'])->name('module-generator.index');
 // Route::post('/module-generator', [ModuleGeneratorController::class, 'generate'])->name('module-generator.generate');
+
 Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
 
-Route::resource('siswa', App\Http\Controllers\SiswaController::class);
-
-Route::resource('buah-buahan', App\Http\Controllers\BuahController::class);
-
-Route::resource('olahraga', App\Http\Controllers\AtletController::class);
-
-Route::resource('barang', App\Http\Controllers\BarangController::class);
+Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);

@@ -57,7 +57,7 @@
         </table>
       </div>     
       <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-        <button style="background-color: #007bff; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">Step 3 &raquo;</button>
+        <button style="background-color: #007bff; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">Save &raquo;</button>
       </div>
     </form>
 @endsection

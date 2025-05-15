@@ -14,26 +14,14 @@ class MahasiswaController extends Controller
         $displayForm = [
 
             [
-	'label' => "Input Nama",
-	'type' => "text",
-	'validation' => "required",
-    ],
-            [
-	'label' => "Input Nama",
+	'label' => "Nama",
 	'type' => "text",
 	'validation' => "required",
     ],
 
 
             [
-	'label' => "Input NIM",
-	'type' => "text",
-	'validation' => "required",
-    ],
-
-
-            [
-	'label' => "Input Prodi",
+	'label' => "Nim",
 	'type' => "text",
 	'validation' => "required",
     ],
@@ -41,10 +29,7 @@ class MahasiswaController extends Controller
         $data = Mahasiswa::all();
         $menus = Menu::all();
         $columns = Schema::getColumnListing('mahasiswa');
-        // Kolom yang ingin dikecualikan
         $excludedColumns = ['id', 'created_at', 'updated_at'];
-
-        // Hapus kolom yang tidak diinginkan
         $filteredColumns = array_diff($columns, $excludedColumns);
         return view('generated-crud.show', ['tittle' => 'Mahasiswa', 'routeName'=> 'mahasiswa'], compact('data','menus','filteredColumns','displayForm'));
     }
@@ -52,8 +37,7 @@ class MahasiswaController extends Controller
     {
         $validatedData = $request->validate([
             'Nama' => 'required|string|max:255',
-            'Nim' => 'required|string|max:255',
-            'Prodi' => 'required|string|max:255',
+'Nim' => 'required|string|max:255',
 
         ]);
 
@@ -68,12 +52,12 @@ class MahasiswaController extends Controller
     public function update(Request $request, Mahasiswa $item)
     {
         $item->update($request->all());
-        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil diubah.');
+        return redirect()->route('generated-crud.show')->with('success', 'Data berhasil diubah.');
     }
 
     public function destroy(Mahasiswa $item)
     {
         $item->delete();
-        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil dihapus.');
+        return redirect()->route('generated-crud.show')->with('success', 'Data berhasil dihapus.');
     }
 }
